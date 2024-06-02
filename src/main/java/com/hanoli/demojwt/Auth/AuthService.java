@@ -26,8 +26,10 @@ public class AuthService {
     	System.out.println("password:" + request.getPassword());
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
         UserDetails user=userRepository.findByUsername(request.getUsername()).orElseThrow();
+        String usuario=request.getUsername();
         String token=jwtService.getToken(user);
         return AuthResponse.builder()
+        	.user(usuario)
             .token(token)
             .build();
 
@@ -45,7 +47,7 @@ public class AuthService {
             .role(Role.USER)
             .build();
 
-        userRepository.save(user);
+       // userRepository.save(user);
 
         return AuthResponse.builder()
             .token(jwtService.getToken(user))

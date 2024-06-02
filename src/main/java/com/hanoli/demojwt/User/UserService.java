@@ -1,5 +1,8 @@
 package com.hanoli.demojwt.User;
 import org.springframework.stereotype.Service;
+
+import com.hanoli.demojwt.entity.Cliente;
+
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
@@ -24,17 +27,19 @@ public class UserService {
         return new UserResponse("El usuario se registró satisfactoriamente");
     }
 
-    public UserDTO getUser(Integer id) {
-        User user= userRepository.findById(id).orElse(null);
+    public UserDTO2 getUser(Integer id) {
+        Cliente user= userRepository.findById(id).orElse(null);
        
         if (user!=null)
         {
-            UserDTO userDTO = UserDTO.builder()
+            UserDTO2 userDTO = UserDTO2.builder()
             .id(user.id)
-            .username(user.username)
-            .firstname(user.firstname)
-            .lastname(user.lastname)
-            .country(user.country)
+            .username(user.getUsername())
+            .nombre(user.getNombre())
+            .apellidoPat(user.getApellidoPat())
+            .apellidoMat(user.getApellidoMat())
+            .telefono(user.getTelefono())
+            .direccion(user.getDireccion())
             .build();
             return userDTO;
         }
