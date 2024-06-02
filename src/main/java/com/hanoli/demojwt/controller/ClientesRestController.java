@@ -75,7 +75,7 @@ public class ClientesRestController {
 	}
 	
 	@PutMapping("/actualizar/{id}")
-	public ResponseEntity<?> actualiza(@RequestBody ClienteRequest cliente, @PathVariable Long id){
+	public ResponseEntity<?> actualiza(@PathVariable Long id,@RequestBody ClienteRequest cliente){
 		System.out.println("[Method Update]" );
 		System.out.println("IdCliente: " + id);
 	
@@ -110,7 +110,7 @@ public class ClientesRestController {
 						
 						System.out.println("El cliente se actualizo con exito");
 						response.put("mensaje", "El cliente se actualizo con exito");
-						return new ResponseEntity<Map<String,Object>>(response, HttpStatus.NOT_FOUND);
+						return new ResponseEntity<Map<String,Object>>(response, HttpStatus.CREATED);
 						
 					}catch (Exception e) {
 						System.out.println("Exception: " + e.getMessage());
