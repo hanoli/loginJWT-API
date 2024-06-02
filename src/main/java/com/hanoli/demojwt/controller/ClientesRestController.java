@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hanoli.demojwt.Auth.ClienteRequest;
 import com.hanoli.demojwt.User.Role;
-import com.hanoli.demojwt.User.User;
 import com.hanoli.demojwt.entity.Cliente;
 import com.hanoli.demojwt.sevicesImpl.ClienteServiceImpl;
 
@@ -63,7 +62,7 @@ public class ClientesRestController {
 	            .role(Role.USER)
 	            .build();
 		try {
-			clientesImpl.updateClientebyId(clte);	
+			clientesImpl.guardaCliente(clte);	
 		}catch (Exception e) {
 			response.put("mensaje", "Hubo un problema al guardar el cliente");
 			return new ResponseEntity<Map<String,Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
