@@ -16,4 +16,6 @@ public interface IClienteService {
 	
 	public Cliente guardaCliente(Cliente cliente);
 	
+	public void Eliminar(Long id);
+	
 }

@@ -47,5 +47,12 @@ public class ClienteServiceImpl implements IClienteService{
 	public Cliente guardaCliente(Cliente cliente) {
 		return clientesDao.save(cliente);
 	}
+	
+	
+	@Override
+	public void Eliminar(Long id) {
+		 clientesDao.deleteById(id);
+		
+	}
 
 }
