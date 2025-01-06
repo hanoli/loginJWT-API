@@ -41,7 +41,8 @@ public class UsuarioServiceImpl implements IUsuarioService{
 				 cliente.getApellidoMat(),
 				 cliente.getDireccion(),
 				 cliente.getTelefono(),
-				 cliente.getUsername()
+				 cliente.getUsername(),
+				 cliente.getPassword()
 				 );
 	}
 	

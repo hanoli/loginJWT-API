@@ -102,7 +102,7 @@ public class UsuariosRestController {
 				            .direccion(cliente.getDireccion())
 				            .telefono(cliente.getTelefono())
 				            .username(cliente.getUsername())
-				           // .password(passwordEncoder.encode( cliente.getPassword()))
+				            .password(passwordEncoder.encode( cliente.getPassword()))
 				            .build();
 					
 					try {

@@ -15,9 +15,9 @@ public interface UsuarioRepository extends CrudRepository<Cliente, Long>{
 	@Modifying()
 	@Transactional()
     //@Query("update Cliente u set u.firstname=:firstname, u.lastname=:lastname, u.country=:country where u.id = :id")
-	@Query("update Cliente u set u.nombre=:nombre, u.apellidoPat=:apellidoPat, u.apellidoMat=:apellidoMat,u.direccion=:direccion, u.telefono=:telefono, u.username=:username where u.id = :id")
+	@Query("update Cliente u set u.nombre=:nombre, u.apellidoPat=:apellidoPat, u.apellidoMat=:apellidoMat,u.direccion=:direccion, u.telefono=:telefono, u.username=:username,u.password=:password where u.id = :id")
 	void updateCliente(@Param(value = "id") Long id,@Param(value = "nombre") String nombre,@Param(value = "apellidoPat")String apellidoPat,@Param(value = "apellidoMat")String apellidoMat,
-    		@Param(value = "direccion")String direccion,@Param(value = "telefono")String telefono,@Param(value = "username")String username);
+    		@Param(value = "direccion")String direccion,@Param(value = "telefono")String telefono,@Param(value = "username")String username,@Param(value = "password")String password);
 
 
 	
