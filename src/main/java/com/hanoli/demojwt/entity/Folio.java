@@ -40,6 +40,7 @@ public class Folio implements Serializable{
 	private String modelo;
 	private String numSerie;
 	private String comentarios;
+
 	
 	@JsonIgnoreProperties(value={"folios", "hibernateLazyInitializer", "handler"}, allowSetters=true)
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -89,6 +90,9 @@ public class Folio implements Serializable{
 	public void setNumSerie(String numSerie) {
 		this.numSerie = numSerie;
 	}
+
+	
+	
 	public Cliente getCliente() {
 		return cliente;
 	}

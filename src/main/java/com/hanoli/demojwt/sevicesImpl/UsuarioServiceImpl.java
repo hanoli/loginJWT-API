@@ -4,11 +4,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hanoli.demojwt.repository.ClienteRepository;
+
 import com.hanoli.demojwt.repository.UsuarioRepository;
 import com.hanoli.demojwt.User.Role;
 import com.hanoli.demojwt.User.User;
-import com.hanoli.demojwt.entity.Cliente;
+import com.hanoli.demojwt.entity.Usuario;
 import com.hanoli.demojwt.services.IClienteService;
 import com.hanoli.demojwt.services.IUsuarioService;
 
@@ -20,19 +20,19 @@ public class UsuarioServiceImpl implements IUsuarioService{
 	private UsuarioRepository usuariosDao;
 
 	@Override
-	public List<Cliente> getLista() {
+	public List<Usuario> getLista() {
 		
-		return (List<Cliente>) usuariosDao.findAll();
+		return (List<Usuario>) usuariosDao.findAll();
 	
 	}
 
 	@Override
-	public Cliente usuarioId(Long id) {	
+	public Usuario usuarioId(Long id) {	
 		 return usuariosDao.findById(id).orElse(null);
 	}
 	
 	@Override
-	public void updateUsuariobyId(Cliente cliente) {
+	public void updateUsuariobyId(Usuario cliente) {
 	
 		usuariosDao.updateCliente(
 				 cliente.getId(), 
@@ -47,7 +47,7 @@ public class UsuarioServiceImpl implements IUsuarioService{
 	}
 	
 	@Override
-	public Cliente guardaUsuario(Cliente cliente) {
+	public Usuario guardaUsuario(Usuario cliente) {
 		return usuariosDao.save(cliente);
 	}
 	

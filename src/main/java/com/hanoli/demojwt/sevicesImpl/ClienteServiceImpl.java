@@ -5,10 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hanoli.demojwt.repository.ClienteRepository;
+import com.hanoli.demojwt.services.IClienteService;
 import com.hanoli.demojwt.User.Role;
 import com.hanoli.demojwt.User.User;
 import com.hanoli.demojwt.entity.Cliente;
-import com.hanoli.demojwt.services.IClienteService;
+import com.hanoli.demojwt.entity.Usuario;
+
 
 
 @Service
@@ -24,31 +26,19 @@ public class ClienteServiceImpl implements IClienteService{
 	
 	}
 
+	
 	@Override
-	public Cliente clienteId(Long id) {	
+	public Cliente clienteId(Long id) {
 		 return clientesDao.findById(id).orElse(null);
 	}
-	
+
+
 	@Override
-	public void updateClientebyId(Cliente cliente) {
-	
-		  clientesDao.updateCliente(
-				 cliente.getId(), 
-				 cliente.getNombre(), 
-				 cliente.getApellidoPat(), 
-				 cliente.getApellidoMat(),
-				 cliente.getDireccion(),
-				 cliente.getTelefono(),
-				 cliente.getUsername()
-				 );
+	public Cliente guardaCliente(Cliente empleado) {
+		return clientesDao.save(empleado);
 	}
-	
-	@Override
-	public Cliente guardaCliente(Cliente cliente) {
-		return clientesDao.save(cliente);
-	}
-	
-	
+
+
 	@Override
 	public void Eliminar(Long id) {
 		 clientesDao.deleteById(id);

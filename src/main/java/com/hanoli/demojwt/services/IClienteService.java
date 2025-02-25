@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.hanoli.demojwt.User.User;
 import com.hanoli.demojwt.entity.Cliente;
+import com.hanoli.demojwt.entity.Usuario;
 
 
 public interface IClienteService {
@@ -12,9 +13,7 @@ public interface IClienteService {
 
 	public Cliente clienteId(Long Id);
 	
-	public void updateClientebyId(Cliente cliente);
-	
-	public Cliente guardaCliente(Cliente cliente);
+	public Cliente guardaCliente(Cliente empleado);
 	
 	public void Eliminar(Long id);
 	

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hanoli.demojwt.Auth.ClienteRequest;
 import com.hanoli.demojwt.User.Role;
-import com.hanoli.demojwt.entity.Cliente;
+import com.hanoli.demojwt.entity.Usuario;
 import com.hanoli.demojwt.sevicesImpl.ClienteServiceImpl;
 import com.hanoli.demojwt.sevicesImpl.UsuarioServiceImpl;
 
@@ -41,7 +41,7 @@ public class UsuariosRestController {
 	private UsuarioServiceImpl usuariosImpl;
 	
 	@GetMapping("/listUser")
-	public List<Cliente> getUsuarios(){
+	public List<Usuario> getUsuarios(){
 		return usuariosImpl.getLista();
 	}
 	
@@ -52,7 +52,7 @@ public class UsuariosRestController {
 		System.out.println("[Method Save]" );
 		Map<String,Object> response = new HashMap<>();
 		
-		Cliente clte = Cliente.builder()
+		Usuario clte = Usuario.builder()
 				.id(cliente.getId())
 	            .nombre(cliente.getNombre())
 	            .apellidoPat(cliente.getApellidoPat())
@@ -84,7 +84,7 @@ public class UsuariosRestController {
 		
 		try {
 			
-			Cliente dataClte = usuariosImpl.usuarioId(id);	
+			Usuario dataClte = usuariosImpl.usuarioId(id);	
 			
 			if(dataClte == null) {
 				System.out.println("Cliente no existe");
@@ -94,7 +94,7 @@ public class UsuariosRestController {
 				
 				}else {
 					
-					Cliente clte = Cliente.builder()
+					Usuario clte = Usuario.builder()
 							.id(cliente.getId())
 							.nombre(cliente.getNombre())
 				            .apellidoPat(cliente.getApellidoPat())

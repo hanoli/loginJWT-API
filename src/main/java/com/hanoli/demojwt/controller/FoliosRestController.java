@@ -99,7 +99,7 @@ public class FoliosRestController {
 		try {
 			folioService.guardaFolio(folio);	
 		}catch (Exception e) {
-			response.put("mensaje", "Hubo un problema al guardar el folio");
+			response.put("mensaje", "Hubo un problema al guardar el folio" + e.getMessage());
 			return new ResponseEntity<Map<String,Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		

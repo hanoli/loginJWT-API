@@ -7,10 +7,10 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.hanoli.demojwt.entity.Cliente;
+import com.hanoli.demojwt.entity.Usuario;
 
-public interface UserRepository extends JpaRepository<Cliente,Integer> {
-    Optional<Cliente> findByUsername(String username); 
+public interface UserRepository extends JpaRepository<Usuario,Integer> {
+    Optional<Usuario> findByUsername(String username); 
     
     @Modifying()
     @Query("update User u set u.firstname=:firstname, u.lastname=:lastname, u.country=:country where u.id = :id")

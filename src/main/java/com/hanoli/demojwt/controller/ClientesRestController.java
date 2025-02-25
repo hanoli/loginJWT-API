@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hanoli.demojwt.Auth.ClienteRequest;
 import com.hanoli.demojwt.User.Role;
 import com.hanoli.demojwt.entity.Cliente;
+import com.hanoli.demojwt.entity.Usuario;
 import com.hanoli.demojwt.sevicesImpl.ClienteServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -33,11 +34,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class ClientesRestController {
-	
-	 private final PasswordEncoder passwordEncoder;
 
 	@Autowired
 	private ClienteServiceImpl clientesImpl;
+	
 	
 	@GetMapping("/lista")
 	public List<Cliente> getClientes(){
@@ -45,25 +45,29 @@ public class ClientesRestController {
 	}
 	
 	
-	@PostMapping("/guardar")
-	public ResponseEntity<?> guardaCliente(@RequestBody ClienteRequest cliente ) {
-	
-		System.out.println("[Method Save]" );
+	@GetMapping("/idCliente/{id}")
+	public ResponseEntity<?> getClienteById(@PathVariable Long id){
+		Cliente cliente = clientesImpl.clienteId(id);
+		
 		Map<String,Object> response = new HashMap<>();
 		
-		Cliente clte = Cliente.builder()
-				.id(cliente.getId())
-	            .nombre(cliente.getNombre())
-	            .apellidoPat(cliente.getApellidoPat())
-	            .apellidoMat(cliente.getApellidoMat())
-	            .direccion(cliente.getDireccion())
-	            .telefono(cliente.getTelefono())
-	            .username(cliente.getUsername())
-	            .password(passwordEncoder.encode( cliente.getPassword()))
-	            .role(Role.USER)
-	            .build();
+		if(cliente == null) {
+			response.put("mensaje", "El Id del empleado no existe");
+			return new ResponseEntity<Map<String,Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity(cliente, HttpStatus.OK); 
+	}
+	
+	
+	@PostMapping("/guardar")
+	public ResponseEntity<?> guardaCliente(@RequestBody Cliente empleado ) {
+			
+		
+		Map<String,Object> response = new HashMap<>();
+		
 		try {
-			clientesImpl.guardaCliente(clte);	
+			clientesImpl.guardaCliente(empleado);	
 		}catch (Exception e) {
 			response.put("mensaje", "Hubo un problema al guardar el cliente");
 			return new ResponseEntity<Map<String,Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -74,63 +78,45 @@ public class ClientesRestController {
 		
 	}
 	
-	@PutMapping("/actualizar/{id}")
-	public ResponseEntity<?> actualiza(@PathVariable Long id,@RequestBody ClienteRequest cliente){
-		System.out.println("[Method Update]" );
-		System.out.println("IdCliente: " + id);
 	
+	@PutMapping("/actualizar/{id}")
+	public ResponseEntity<?> actualiza(@RequestBody Cliente cliente, @PathVariable Long id){
+		
+		Cliente clte = clientesImpl.clienteId(id);
+		
 		Map<String,Object> response = new HashMap<>();
 		
-		try {
+		if(clte == null) {
 			
-			Cliente dataClte = clientesImpl.clienteId(id);	
 			
-			if(dataClte == null) {
-				System.out.println("Cliente no existe");
+			response.put("mensaje", "El Id del empleado no existe");
+			return new ResponseEntity<Map<String,Object>>(response, HttpStatus.NOT_FOUND);
+		}else {
+			try {
 				
-				response.put("mensaje", "No se encontro cliente");
-				return new ResponseEntity<Map<String,Object>>(response, HttpStatus.NOT_FOUND);
+				clte.setNombre(cliente.getNombre());
+				clte.setApellidoPat(cliente.getApellidoPat());
+				clte.setApellidoMat(cliente.getApellidoMat());
+				clte.setDireccion(cliente.getDireccion());
+				clte.setTelefono(cliente.getTelefono());
+				clte.setCorreo(cliente.getCorreo());
 				
-				}else {
-					
-					Cliente clte = Cliente.builder()
-							.id(cliente.getId())
-							.nombre(cliente.getNombre())
-				            .apellidoPat(cliente.getApellidoPat())
-				            .apellidoMat(cliente.getApellidoMat())
-				            .direccion(cliente.getDireccion())
-				            .telefono(cliente.getTelefono())
-				            .username(cliente.getUsername())
-				           // .password(passwordEncoder.encode( cliente.getPassword()))
-				            .build();
-					
-					try {
-						
-						clientesImpl.updateClientebyId(clte);
-						
-						System.out.println("El cliente se actualizo con exito");
-						response.put("mensaje", "El cliente se actualizo con exito");
-						return new ResponseEntity<Map<String,Object>>(response, HttpStatus.CREATED);
-						
-					}catch (Exception e) {
-						System.out.println("Exception: " + e.getMessage());
-						response.put("mensaje", "Hubo un problema al actualizar el cliente ");
-						return new ResponseEntity<Map<String,Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-					}
-		
-				}
-			
-		}catch (Exception e) {
-			response.put("mensaje", "Hubo un problema al buscar el cliente por Id");
-			return new ResponseEntity<Map<String,Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+				clientesImpl.guardaCliente(clte);
+				
+			}catch (Exception e) {
+				response.put("mensaje", "Hubo un problema al actualizar el cliente");
+				return new ResponseEntity<Map<String,Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+			response.put("mensaje", "El cliente se actualizo con exito");
+			return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
 		}
+		
 	}
 	
 	
 	@DeleteMapping("/eliminar/{id}")
 	public void eliminar(@PathVariable Long id) {
-		System.out.println("[Method Delete]" );
-		System.out.println("IdClient:" + id );
+		
 		clientesImpl.Eliminar(id);
 		
 	}

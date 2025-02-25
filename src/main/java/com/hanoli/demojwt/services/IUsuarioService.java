@@ -3,18 +3,18 @@ package com.hanoli.demojwt.services;
 import java.util.List;
 
 import com.hanoli.demojwt.User.User;
-import com.hanoli.demojwt.entity.Cliente;
+import com.hanoli.demojwt.entity.Usuario;
 
 
 public interface IUsuarioService {
 	
-	public List<Cliente> getLista();
+	public List<Usuario> getLista();
 
-	public Cliente usuarioId(Long Id);
+	public Usuario usuarioId(Long Id);
 	
-	public void updateUsuariobyId(Cliente cliente);
+	public void updateUsuariobyId(Usuario cliente);
 	
-	public Cliente guardaUsuario(Cliente cliente);
+	public Usuario guardaUsuario(Usuario cliente);
 	
 	public void Eliminar(Long id);
 	

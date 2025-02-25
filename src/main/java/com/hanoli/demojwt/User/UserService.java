@@ -1,7 +1,7 @@
 package com.hanoli.demojwt.User;
 import org.springframework.stereotype.Service;
 
-import com.hanoli.demojwt.entity.Cliente;
+import com.hanoli.demojwt.entity.Usuario;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +28,7 @@ public class UserService {
     }
 
     public UserDTO2 getUser(Integer id) {
-        Cliente user= userRepository.findById(id).orElse(null);
+        Usuario user= userRepository.findById(id).orElse(null);
        
         if (user!=null)
         {
