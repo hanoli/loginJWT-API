@@ -52,7 +52,7 @@ public class ClientesRestController {
 		Map<String,Object> response = new HashMap<>();
 		
 		if(cliente == null) {
-			response.put("mensaje", "El Id del empleado no existe");
+			response.put("mensaje", "El Id del cliente no existe");
 			return new ResponseEntity<Map<String,Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		
@@ -61,13 +61,13 @@ public class ClientesRestController {
 	
 	
 	@PostMapping("/guardar")
-	public ResponseEntity<?> guardaCliente(@RequestBody Cliente empleado ) {
+	public ResponseEntity<?> guardaCliente(@RequestBody Cliente cliente ) {
 			
 		
 		Map<String,Object> response = new HashMap<>();
 		
 		try {
-			clientesImpl.guardaCliente(empleado);	
+			clientesImpl.guardaCliente(cliente);	
 		}catch (Exception e) {
 			response.put("mensaje", "Hubo un problema al guardar el cliente");
 			return new ResponseEntity<Map<String,Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -89,7 +89,7 @@ public class ClientesRestController {
 		if(clte == null) {
 			
 			
-			response.put("mensaje", "El Id del empleado no existe");
+			response.put("mensaje", "El Id del cliente no existe");
 			return new ResponseEntity<Map<String,Object>>(response, HttpStatus.NOT_FOUND);
 		}else {
 			try {

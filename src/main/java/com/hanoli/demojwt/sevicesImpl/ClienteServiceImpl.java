@@ -34,8 +34,8 @@ public class ClienteServiceImpl implements IClienteService{
 
 
 	@Override
-	public Cliente guardaCliente(Cliente empleado) {
-		return clientesDao.save(empleado);
+	public Cliente guardaCliente(Cliente cliente) {
+		return clientesDao.save(cliente);
 	}
 
 

@@ -1,6 +1,7 @@
 package com.hanoli.demojwt.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -36,6 +38,8 @@ public class Cliente implements Serializable{
 	private String direccion;
 	private String telefono;
 	private String correo;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private LocalDate fechaAlta;
 	
 	@JsonIgnoreProperties(value={"cliente", "hibernateLazyInitializer", "handler"}, allowSetters=true)
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente", cascade = CascadeType.ALL)
@@ -95,6 +99,18 @@ public class Cliente implements Serializable{
 	}
 	
 	
+
+
+	public LocalDate getFechaAlta() {
+		return fechaAlta;
+	}
+
+
+	public void setFechaAlta(LocalDate fechaAlta) {
+		this.fechaAlta = fechaAlta;
+	}
+
+
 	public List<Folio> getFolios() {
 		return folios;
 	}
