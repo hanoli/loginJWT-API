@@ -19,9 +19,9 @@ public class UserController {
     private final UserService userService;
     
     @GetMapping(value = "{id}")
-    public ResponseEntity<UserDTO> getUser(@PathVariable Integer id){
+    public ResponseEntity<UserDTO2> getUser(@PathVariable Integer id){
     	System.out.print("id: " + id );
-        UserDTO userDTO = userService.getUser(id);
+        UserDTO2 userDTO = userService.getUser(id);
         if (userDTO==null)
         {
            return ResponseEntity.notFound().build();
